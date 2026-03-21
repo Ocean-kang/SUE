@@ -1,5 +1,9 @@
-# SUE
-This is the official PyTorch implementation of SUE from the paper "The Hidden Power of Unpaired Data for Multimodal Learning".
+# Learning Shared Representations from Unpaired Data (SUE)
+
+**[Project Page](https://shaham-lab.github.io/SUE_page/) | [arXiv](https://arxiv.org/abs/2505.21524)**
+
+This is the official PyTorch implementation of SUE from the paper "Learning Shared Representations from Unpaired Data".
+
 <p align="center">
     <img src="https://github.com/shaham-lab/SUE/blob/main/SUE.png" width="600">
 </p>
@@ -34,3 +38,14 @@ python retrieval.py --test flickr30
 ```bash
 python retrieval.py --train flickr30
 ```
+
+## Citation
+If you find our work useful, please cite it:
+
+```bibtex
+@inproceedings{yacobi2025sue,
+    title={Learning Shared Representations from Unpaired Data},
+    author={Yacobi, Amitai and Ben-Ari, Nir and Talmon, Ronen and Shaham, Uri},
+    journal={Advances in Neural Information Processing Systems},
+    year={2025}
+}
