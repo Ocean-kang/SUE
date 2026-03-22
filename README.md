@@ -39,6 +39,38 @@ python retrieval.py --test flickr30
 python retrieval.py --train flickr30
 ```
 
+### Using the Trainer Directly
+If you want to bypass the command-line interface or apply SUE to your own data pipeline, you can interact with the `Trainer` class directly.
+
+Before training, Ensuring your training data is properly formatted as weakly paired. You can achieve this using the create_weakly_parallel_data function.
+
+```python
+from data import load_dataset, create_weakly_parallel_data
+from trainer import Trainer
+
+# 1. Load your configuration and dataset
+train_set, test_set = load_dataset("your_dataset_name", n_test=400)
+
+# 2. Make your data weakly paired (Crucial step for SUE)
+train_set = create_weakly_parallel_data(train_set, n_parallel=100)
+
+# 3. Initialize the Trainer
+trainer = Trainer(
+    dataset_name="your_dataset_name",
+    n_parallel=100, 
+    n_components=30, # Adjust based on your config
+    configs=your_config_dict
+)
+
+# 4. Fit the model using the weakly paired data
+trainer.fit(
+    train_set=train_set, 
+)
+
+# 5. Test the model
+trainer.test(test_set=test_set)
+```
+
 ## Citation
 If you find our work useful, please cite it:
 
