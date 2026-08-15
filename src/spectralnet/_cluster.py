@@ -152,7 +152,7 @@ class SpectralNet:
         self.spectral_is_local_scale = spectral_is_local_scale
         self.spectral_batch_size = spectral_batch_size
         self.spectral_input_dim = spectral_input_dim
-        self.device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
         self.spec_net = SpectralNetModel(
             self.spectral_hiddens, input_dim=self.spectral_input_dim

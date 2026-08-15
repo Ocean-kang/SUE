@@ -432,7 +432,7 @@ def align_modalities_unpaired_once(X1: np.ndarray, X2: np.ndarray, batch_size: i
     return coefs
 
 
-def compute_clip_scores(embedding1, embedding2, mode='i2t', device: str = "cuda:1", dataset_name: str = 'flickr30'):
+def compute_clip_scores(embedding1, embedding2, mode='i2t', device: str = "cuda:0", dataset_name: str = 'flickr30'):
     # Input validation
     if mode not in ['i2t', 't2i']:
         raise ValueError("Mode must be either 'i2t' or 't2i'")
@@ -538,7 +538,7 @@ def compute_clip_scores(embedding1, embedding2, mode='i2t', device: str = "cuda:
     return (np.mean(relative_scores_array), np.std(relative_scores_array))
 
 
-def compute_clip_scores_k(embedding1, embedding2, mode='i2t', device: str = "cuda:1", dataset_name: str = 'flickr30'):
+def compute_clip_scores_k(embedding1, embedding2, mode='i2t', device: str = "cuda:0", dataset_name: str = 'flickr30'):
     # Input validation
     if mode not in ['i2t', 't2i']:
         raise ValueError("Mode must be either 'i2t' or 't2i'")
@@ -649,7 +649,7 @@ def compute_clip_scores_k(embedding1, embedding2, mode='i2t', device: str = "cud
     return results
 
 
-def compute_clip_scores_5_10(embedding1, embedding2, mode='i2t', device: str = "cuda:1", dataset_name: str = 'flickr30'):
+def compute_clip_scores_5_10(embedding1, embedding2, mode='i2t', device: str = "cuda:0", dataset_name: str = 'flickr30'):
     if mode not in ['i2t', 't2i']:
         raise ValueError("Mode must be either 'i2t' or 't2i'")
     if dataset_name not in ['flickr8', 'flickr30']:
@@ -1149,7 +1149,7 @@ def visualize_nearest_neighbors(dataset, image_embeddings, num_examples=5, k=5):
         plt.savefig(f"query_image_{idx}.png")
 
 
-def visualize_with_clip_score(embedding1, embedding2, mode='i2t', device: str = "cuda:1", dataset_name: str = 'flickr30', k: int = 5, num_queries: int = 30):
+def visualize_with_clip_score(embedding1, embedding2, mode='i2t', device: str = "cuda:0", dataset_name: str = 'flickr30', k: int = 5, num_queries: int = 30):
     # Input validation
     if mode not in ['i2t', 't2i']:
         raise ValueError("Mode must be either 'i2t' or 't2i'")
@@ -1376,7 +1376,7 @@ def load_checkpoint(trainer, path):
     path : str
         Path to the checkpoint file
     """
-    checkpoint = torch.load(path)
+    checkpoint = torch.load(path, map_location=trainer.device)
     
     # Load SpectralNet1
     for k, v in checkpoint['spectralnet1_attributes'].items():

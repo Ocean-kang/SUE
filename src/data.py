@@ -15,7 +15,7 @@ from torch.utils.data import Dataset, DataLoader, random_split
 from encoders import *
 
 
-device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 import os
 from PIL import Image
@@ -458,8 +458,8 @@ def embed_raw_data_using_pretrained_encoders(dataset, encoder1, encoder2):
 
 def preprocess_data(path_to_encodings, n_test=400):
     try:
-        encoded1 = torch.load(os.path.join(path_to_encodings, "encoded1.pt"))
-        encoded2 = torch.load(os.path.join(path_to_encodings, "encoded2.pt"))
+        encoded1 = torch.load(os.path.join(path_to_encodings, "encoded1.pt"), map_location="cpu")
+        encoded2 = torch.load(os.path.join(path_to_encodings, "encoded2.pt"), map_location="cpu")
     except FileNotFoundError:
         raise FileNotFoundError("Can't find the encoded data. Please first encode the data.")
     

@@ -22,7 +22,7 @@ from spectralnet._utils import *
     
 
 class Trainer:
-    def __init__(self, dataset_name='', n_parallel=500, n_eigenvectors=10, n_components=8, device=torch.device("cuda:1"), configs={}):
+    def __init__(self, dataset_name='', n_parallel=500, n_eigenvectors=10, n_components=8, device=torch.device("cuda:0"), configs={}):
         self.device = device
         self.n_parallel = n_parallel
         self.n_components = n_components
