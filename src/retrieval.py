@@ -1,3 +1,7 @@
+import random
+import numpy as np
+import torch
+
 import sys
 import json
 import warnings
@@ -7,6 +11,16 @@ from data import *
 from trainer import *
 from general_utils import *
 
+def set_seed(seed):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+
+    # 尽量保证复现
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
 
 def load_config_file(dataset_name):
     with open(f"../configs/{dataset_name}_config.json", "r") as config_file:
@@ -23,7 +37,11 @@ def main():
     parser.add_argument('data', type=str, help='Dataset name (e.g., flickr30)')
     parser.add_argument('--train', action='store_true', help='Perform training')
     parser.add_argument('--test', action='store_true', help='Perform testing')
+    parser.add_argument('--seed', type=int, default=0, help='Random seed')
     args = parser.parse_args()
+    
+    set_seed(args.seed)
+    print(f"Using random seed: {args.seed}")
     
     dataset_name = args.data
     configs = load_config_file(dataset_name)
