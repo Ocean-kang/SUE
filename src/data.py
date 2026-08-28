@@ -469,10 +469,31 @@ def preprocess_data(path_to_encodings, n_test=400):
 
 
 
+# def load_dataset(dataset_name, n_test):
+#     if dataset_name == "flickr30":
+#         train_set, test_set = preprocess_data(path_to_encodings="../data/flickr30/", n_test=n_test)
+#         return train_set, test_set
+
+#     else:
+#         raise ValueError("Dataset is not supported, please add this dataset manually.")
+
 def load_dataset(dataset_name, n_test):
+
     if dataset_name == "flickr30":
-        train_set, test_set = preprocess_data(path_to_encodings="../data/flickr30/", n_test=n_test)
-        return train_set, test_set
+
+        path = "../data/flickr30/"
+
+    elif dataset_name == "mscoco":
+
+        path = "../data/mscoco/"
 
     else:
-        raise ValueError("Dataset is not supported, please add this dataset manually.")
+
+        raise ValueError(
+            f"Dataset {dataset_name} is not supported."
+        )
+
+    return preprocess_data(
+        path_to_encodings=path,
+        n_test=n_test
+    )
