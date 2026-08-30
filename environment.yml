@@ -154,3 +154,4 @@ dependencies:
     - xxhash==3.5.0
     - yarl==1.17.1
     - zipp==3.21.0
+    - POT==0.9.4
